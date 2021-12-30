@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel = "icon" href ="static/logo.jpg" type = "image/x-icon"> 
+  <title>AI - Facial Attribute System</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/upload_preview.js' %}"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md">
+  <img class="img-fluid" style="width: 10%;height: 10%;" src="static/logo.jpg" alt="Logo" >
+  <h1 style="color:#407143;font-weight: bold; font-size: 3vw; margin-left: 2%;"><a style="color: #407143; text-decoration: none;" href="{% url 'faceapp:index' %}">Department of Computer Engineering & Applications</a></h1>
+
+</nav>
+
+<nav style="padding-top: 1%; padding-bottom: 1%; background-color: #407143;" class="navbar navbar-expand-md justify-content-center">
+  
+<h4 style="color: white; font-size: 1.5vw; font-weight: bold;">“Machine Learning Approach for Suspect Face Retrieval using Verbal Description given by an Eye Witness” <br><span style="color: yellow; padding-left: 40%;">A project Sponsored by Ministry of Electronics & IT (MeitY)</span></h4>
+
+
+</nav>
+<nav style="padding-top: 1%; padding-bottom: 1%; background-color: #336eff;" class="navbar navbar-expand-md justify-content-center">
+  
+<h4 style="color: white; font-size: 2vw; font-weight: bold;">AI - Facial Attribute System</h4>
+
+
+</nav>
+
+  
+<br>
+
+<div  class="container" >
+  <div style="text-align: center;" class="row">
+  <div class="col-sm-6"><a href="{% url 'faceapp:automatic_tagging' %}" class="btn btn-primary" role="button">Automatic Facial Attribute Tagging</a></div>
+  <div class="col-sm-6"><a href="{% url 'faceapp:suspect_retrieval' %}" class="btn btn-primary" role="button">Suspect Face Retrieval</a></div>  
+  </div>
+
+</div>
+
+</body>
+</html>
+
+

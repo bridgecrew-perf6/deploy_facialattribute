@@ -1,0 +1,209 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel = "icon" href ="static/logo.jpg" type = "image/x-icon"> 
+  <title>AI - Facial Features Tagging Result</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/upload_preview.js' %}"></script>
+</head>
+<body>
+  {% csrf_token %}
+<nav class="navbar navbar-expand-md">
+  <img class="img-fluid" style="width: 10%;height: 10%;" src="static/logo.jpg" alt="Logo" >
+  <h1 style="color:#407143;font-weight: bold; font-size: 3vw; margin-left: 2%;">Department of Computer Engineering & Applications</h1>
+
+</nav>
+
+<nav style="padding-top: 1%; padding-bottom: 1%; background-color: #407143;" class="navbar navbar-expand-md justify-content-center">
+  
+<h4 style="color: white; font-size: 1.5vw; font-weight: bold;">“Machine Learning Approach for Suspect Face Retrieval using Verbal Description given by an Eye Witness” <br><span style="color: yellow; padding-left: 40%;">A project Sponsored by Ministry of Electronics & IT (MeitY)</span></h4>
+
+
+</nav>
+<nav style="padding-top: 1%; padding-bottom: 1%; background-color: #336eff;" class="navbar navbar-expand-md justify-content-center">
+  
+<h4 style="color: white; font-size: 2vw; font-weight: bold;">AI - Facial Features Tagging Result</h4>
+
+
+</nav>
+
+  
+<br>
+
+<div  class="container" >
+    <div class="row">
+      <div class="col-sm-12"></div>
+    </div>
+    <div class="row">
+  <div class="col" >
+      <div style="text-align: center;" class="form-group form-check">
+        {% if filename %}
+        <img class="img-fluid first" id="upload" src="media/{{filename}}" alt="Chania">
+        {% endif %}
+
+  </div>
+
+  </div>
+{% if filename %}
+
+  <div class="col" >
+    <div style="text-align: center;" class="form-group form-check">
+      <h4>Facial Features</h4>
+        <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Features Name</th>
+        <th>Values</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><h6>Gender</h6></td>
+        {% if prediction_gender_value %}
+        <td>{{prediction_gender_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr>
+      <tr>
+        <td><h6>Eyes Color</h6></td>
+        {% if prediction_eyes_color_value %}
+        <td>{{prediction_eyes_color_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr>
+      <tr>
+        <td><h6>Skin Color</h6></td>
+        {% if skin_color_value %}
+        <td>{{skin_color_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr>
+      <tr>
+        <td><h6>Age</h6></td>
+        {% if prediction_age_value %}
+        <td>{{prediction_age_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr>
+      <tr>
+        <td><h6>Face Shape</h6></td>
+        {% if prediction_shape_value %}
+        <td>{{prediction_shape_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr>
+      <tr>
+        <td><h6>Forehead Area</h6></td>
+        {% if prediction_forehead_value %}
+        <td>{{prediction_forehead_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr>
+      <tr>
+        <td><h6>Eyebrows Length</h6></td>
+        {% if eyebrows_length_value %}
+        <td>{{eyebrows_length_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr>
+
+      <tr>
+        <td><h6>Nose Length</h6></td>
+        {% if nose_length_value %}
+        <td>{{nose_length_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr>
+      <tr>
+        <td><h6>Nose Width</h6></td>
+        {% if nose_width_value %}
+        <td>{{nose_width_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr>       
+      <tr>
+        <td><h6>Chin</h6></td>
+        {% if prediction_chin_value %}
+        <td>{{prediction_chin_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr>   
+      <tr>
+        <td><h6>Facial Mole</h6></td>
+        {% if prediction_mole_value %}
+        <td>{{prediction_mole_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr> 
+      <tr>
+        <td><h6>Facial Scar</h6></td>
+        {% if prediction_scar_value %}
+        <td>{{prediction_scar_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr> 
+      <tr>
+        <td><h6>Moustaches</h6></td>
+        {% if prediction_moustache_value %}
+        <td>{{prediction_moustache_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr> 
+      <tr>
+        <td><h6>Beard</h6></td>
+        {% if prediction_beard_value %}
+        <td>{{prediction_beard_value}}</td>
+        {% else %}
+        <td>Not Able To predict</td>
+        {% endif %}
+      </tr> 
+    </tbody>
+  </table>
+    
+          </div>
+  </div>
+{% endif %}
+
+
+
+</div>
+
+<br>
+<form action="tryanotherone" method="post">
+    {% csrf_token %}
+  <div style="text-align: center;">
+    <input type="submit" class="btn btn-info" name="submit_btn" value="Try Another One">
+  </div>
+</form>
+  
+
+
+</div>
+
+</body>
+</html>
+
+

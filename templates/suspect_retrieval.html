@@ -1,0 +1,467 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel = "icon" href ="static/logo.jpg" type = "image/x-icon"> 
+  <title>AI - Suspect Retrieval</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/upload_preview.js' %}"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md">
+  <img class="img-fluid" style="width: 10%;height: 10%;" src="static/logo.jpg" alt="Logo" >
+  <h1 style="color:#407143;font-weight: bold; font-size: 3vw; margin-left: 2%;"><a style="color: #407143; text-decoration: none;" href="{% url 'faceapp:index' %}">Department of Computer Engineering & Applications</a></h1>
+
+</nav>
+
+<nav style="padding-top: 1%; padding-bottom: 1%; background-color: #407143;" class="navbar navbar-expand-md justify-content-center">
+  
+<h4 style="color: white; font-size: 1.5vw; font-weight: bold;">“Machine Learning Approach for Suspect Face Retrieval using Verbal Description given by an Eye Witness” <br><span style="color: yellow; padding-left: 40%;">A project Sponsored by Ministry of Electronics & IT (MeitY)</span></h4>
+
+
+</nav>
+<nav style="padding-top: 1%; padding-bottom: 1%; background-color: #336eff;" class="navbar navbar-expand-md justify-content-center">
+  
+<h4 style="color: white; font-size: 2vw; font-weight: bold;">AI - Suspect Retrieval</h4>
+
+
+</nav>
+
+  
+<br>
+
+<div  class="container" >
+  
+  <form action = "{% url 'faceapp:suspect_retrieval_result' %}"  id="form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        
+  <div id="form1" style="text-align: center;" class="col">
+    <h2>Gender (लिंग)</h2><br>
+
+       <div style="text-align: center;" class="row">
+        <div class="col-sm-4"></div>
+      <div  class="col-sm-4"><img class="img-fluid"  src="static/male_female.jpg" alt="Chania"></div>
+
+    </div>
+
+      <div class="row">
+
+<div class="col-sm-3"></div>
+        <div class="col-sm-3">
+       
+                  <select style="margin-left: 10%;" name="gender" class="custom-select valuecheck" id="gen" onchange="genvalue()" required>
+    <option value="">Select (चयन)</option>
+    <option value="Male">Male (पुरुष)</option>
+    <option value="Female">Female (महिला)</option>
+    <option value="Not">Don't Remember (याद नहीं है)</option>
+    
+  </select>
+        </div>
+        <div class="col-sm-3"><button id="next1" type="button" class="btn btn-primary">Next (आगे)</button>
+
+        </div>
+      </div>
+  </div>
+    <div id="form2" style="text-align: center;" class="col">
+    <h2>Skin Color (त्वचा)</h2><br>
+
+       <div style="text-align: center;" class="row">
+       	<div class="col-sm-4"></div>
+      <div  class="col-sm-4"><img class="img-fluid"  src="static/skin.PNG" alt="Chania"></div>
+
+    </div>
+<br>
+<br>
+      <div class="row">
+                <div class="col"><button id="previous1" type="button" class="btn btn-primary">Previous (पिछला)</button>
+
+        </div>
+        <div class="col-sm-3">
+       
+                  <select style="margin-left: 10%;" name="skin" class="custom-select" required>
+    <option value="">Select (चयन)</option>
+    <option value="Fair">Fair (गोरा)</option>
+    <option value="Olive">Olive (गेरुआ)</option>
+    <option value="Brown">Brown (सावला)</option>
+    <option value="Black Brown">Black Brown (काला)</option>
+    <option value="Not">Don't Remember (याद नहीं है)</option>
+    
+  </select>
+        </div>
+        <div class="col"><button id="next2" type="button" class="btn btn-primary">Next (आगे)</button>
+
+        </div>
+      </div>
+  </div>
+     <div id="form3" style="text-align: center;" class="col">
+    <h2>Age (आयु अनुमान)</h2><br>
+
+       <div style="text-align: center; margin-top: 2%;" class="row">
+       	<div class="col-sm-4"></div>
+      <div  class="col-sm-4"><img class="img-fluid"  src="static/age.png" alt="Chania"></div>
+
+    </div>
+<br>
+<br>
+      <div class="row">
+               <div class="col"><button id="previous2" type="button" class="btn btn-primary">Previous (पिछला)</button>
+
+        </div>
+        <div class="col-sm-3">
+       
+                  <select style="margin-left: 10%;" name="age" class="custom-select" required>
+    <option value="">Select (चयन)</option>
+    <option value="Teenager">Teenager (किशोर) (10-17 Age)</option>
+    <option value="Young Adult">Young Adult (युवा वयस्क) (18-35 Age)</option>
+    <option value="Middle Aged">Middle Aged (मध्यायु का वयस्क) (36-60 Age)</option>
+    <option value="Old Aged">Old Aged (वृद्ध) (60+ Age)</option>
+    <option value="Not">Don't Remember (याद नहीं है)</option>
+    
+  </select>
+        </div>
+        <div class="col"><button id="next3" type="button" class="btn btn-primary">Next (आगे)</button>
+
+        </div>
+      </div>
+  </div>
+      <div id="form4" style="text-align: center;" class="col">
+    <h2>Shape of the face (चेहरे का आकार)</h2><br>
+
+       <div style="text-align: center; margin-top: 2%;" class="row">
+       	<div class="col-sm-4"></div>
+      <div  class="col-sm-4"><img class="img-fluid"  src="static/shape.png" alt="Chania"></div>
+
+    </div>
+<br>
+<br>
+      <div class="row">
+               <div class="col"><button id="previous3" type="button" class="btn btn-primary">Previous (पिछला)</button>
+
+        </div>
+        <div class="col-sm-3">
+       
+                  <select style="margin-left: 10%;" name="shape" class="custom-select" required>
+    <option value="">Select (चयन)</option>
+    <option value="Oval">Oval (अंडाकार)</option>
+    <option value="Round">Round (गोल)</option>
+    <option value="Square">Square (वर्ग )</option>
+    <option value="Diamond">Diamond (हीरा )</option>
+    <option value="Not">Don't Remember (याद नहीं है)</option>
+    
+  </select>
+        </div>
+        <div class="col"><button id="next4" type="button" class="btn btn-primary">Next (आगे)</button>
+
+        </div>
+      </div>
+  </div>
+
+      <div id="form5" style="text-align: center;" class="col">
+    <h2>Forehead Area (माथे क्षेत्र)</h2><br>
+
+       <div style="text-align: center; margin-top: 2%;" class="row">
+       	<div class="col-sm-4"></div>
+      <div  class="col-sm-4"><img class="img-fluid"  src="static/forehead.png" alt="Chania"></div>
+
+    </div>
+<br>
+<br>
+      <div class="row">
+               <div class="col"><button id="previous4" type="button" class="btn btn-primary">Previous (पिछला)</button>
+
+        </div>
+        <div class="col-sm-3">
+       
+                  <select style="margin-left: 10%;" name="forehead" class="custom-select" required>
+    <option value="">Select (चयन)</option>
+    <option value="Broad">Broad (विस्तृत )</option>
+    <option value="Narrow">Narrow (संकीर्ण)</option>
+    <option value="Bald">Bald (गंजा)</option>
+    <option value="Not">Don't Remember (याद नहीं है)</option>
+
+    
+  </select>
+        </div>
+        <div class="col"><button id="next5" type="button" class="btn btn-primary">Next (आगे)</button>
+
+        </div>
+      </div>
+  </div>
+        <div id="form6" style="text-align: center;" class="col">
+    <h2>Eyebrows Length (भौंहों की लंबाई)</h2><br>
+
+       <div style="text-align: center; margin-top: 2%;" class="row">
+       	<div class="col-sm-4"></div>
+      <div  class="col-sm-4"><img class="img-fluid"  src="static/eyebrows.png" alt="Chania"></div>
+
+    </div>
+<br>
+<br>
+      <div class="row">
+               <div class="col"><button id="previous5" type="button" class="btn btn-primary">Previous (पिछला)</button>
+
+        </div>
+        <div class="col-sm-3">
+       
+                  <select style="margin-left: 10%;" name="eyebrows" class="custom-select" required>
+    <option value="">Select (चयन)</option>
+    <option value="Short">Short (छोटी)</option>
+    <option value="Long">Long (लम्बी)</option>
+    <option value="Not">Don't Remember (याद नहीं है)</option>
+    
+
+    
+  </select>
+        </div>
+        <div class="col"><button id="next6" type="button" class="btn btn-primary">Next (आगे)</button>
+
+        </div>
+      </div>
+  </div>
+          <div id="form7" style="text-align: center;" class="col">
+    <h2>Eyes Color (आंखों के रंग)</h2><br>
+
+       <div style="text-align: center; margin-top: 2%;" class="row">
+       	<div class="col-sm-4"></div>
+      <div  class="col-sm-4"><img class="img-fluid" src="static/eyes.png" alt="Chania"></div>
+
+    </div>
+<br>
+<br>
+      <div class="row">
+               <div class="col"><button id="previous6" type="button" class="btn btn-primary">Previous (पिछला)</button>
+
+        </div>
+        <div class="col-sm-3">
+       
+                  <select style="margin-left: 10%;" name="eyes" class="custom-select" required>
+    <option value="">Select (चयन)</option>
+    <option value="Black-Brown">Black-Brown (काली-भूरा)</option>
+    <option value="Gray">Gray (धूसर )</option>
+    <option value="Blue">Blue (नीला)</option>
+    <option value="Not">Don't Remember (याद नहीं है)</option>
+    
+
+    
+  </select>
+        </div>
+        <div class="col"><button id="next7" type="button" class="btn btn-primary">Next (आगे)</button>
+
+        </div>
+      </div>
+  </div>
+            <div id="form8" style="text-align: center;" class="col">
+    <h2>Nose Length (नाक की लंबाई)</h2><br>
+        
+       <div style="text-align: center; margin-top: 2%;" class="row">
+       	<div class="col-sm-4"></div>
+      <div  class="col-sm-4"><img class="img-fluid"  src="static/noselength.png" alt="Chania"></div>
+    </div>
+
+
+
+
+<br>
+      <div class="row">
+               <div class="col"><button id="previous7" type="button" class="btn btn-primary">Previous (पिछला)</button>
+
+        </div>
+            <div class="col-sm-3">
+      
+    <select style="margin-left: 10%;" name="noselength" class="custom-select" required>
+    <option value="">Select (चयन)</option>
+    <option value="Short">Short (छोटी)</option>
+    <option value="Long">Long (लम्बी)</option>
+    <option value="Not">Don't Remember (याद नहीं है)</option>   
+    </select>
+    </div>
+
+        <div class="col"><button id="next8" type="button" class="btn btn-primary">Next (आगे)</button>
+
+        </div>
+      </div>
+  </div>
+              <div id="form81" style="text-align: center;" class="col">
+    <h2>Nose Width (नाक की चौड़ाई)</h2><br>
+        
+       <div style="text-align: center; margin-top: 2%;" class="row">
+       	<div class="col-sm-4"></div>
+      <div  class="col-sm-4"><img class="img-fluid"  src="static/nosewidth.png" alt="Chania"></div>
+    </div>
+
+
+
+
+<br>
+      <div class="row">
+               <div class="col"><button id="previous71" type="button" class="btn btn-primary">Previous (पिछला)</button>
+
+        </div>
+            <div class="col-sm-3">
+      
+    <select style="margin-left: 10%;" name="nosewidth" class="custom-select" required>
+    <option value="">Select (चयन)</option>
+    <option value="Narrow">Narrow (संकीर्ण)</option>
+    <option value="Wide">Wide (चौड़ा)</option>
+    <option value="Not">Don't Remember (याद नहीं है)</option>   
+    </select>
+    </div>
+
+        <div class="col"><button id="next81" type="button" class="btn btn-primary">Next (आगे)</button>
+
+        </div>
+      </div>
+  </div>
+            <div id="form9" style="text-align: center;" class="col">
+    <h2>Chin (ठोड़ी)</h2><br>
+
+       <div style="text-align: center; margin-top: 2%;" class="row">
+       	<div class="col-sm-4"></div>
+      <div  class="col-sm-4"><img class="img-fluid"  src="static/chin.png" alt="Chania"></div>
+
+    </div>
+<br>
+<br>
+      <div class="row">
+               <div class="col"><button id="previous8" type="button" class="btn btn-primary">Previous (पिछला)</button>
+
+        </div>
+        <div class="col-sm-3">
+       
+                  <select style="margin-left: 10%;" name="chin" class="custom-select" required>
+    <option value="">Select (चयन)</option>
+    <option value="Round">Round (गोल)</option>
+    <option value="Square">Square (वर्ग )</option>
+    <option value="Double-chin">Double-chin (दोहरी ठुड्डी)</option>
+    <option value="Not">Don't Remember (याद नहीं है)</option>
+    
+    
+
+    
+  </select>
+        </div>
+        <div class="col"><button id="next9" type="button" class="btn btn-primary">Next (आगे)</button>
+
+        </div>
+      </div>
+  </div>
+              <div id="form10" style="text-align: center;" class="col">
+    <h2>Facial Mark (चेहरे पर निशान)</h2><br>
+
+       <div style="text-align: center; margin-top: 2%;" class="row">
+       	<div class="col-sm-4"></div>
+      <div  class="col-sm-4"><img class="img-fluid"  src="static/mark.png" alt="Chania"></div>
+
+    </div>
+
+      <div class="row">
+               <div class="col"><button id="previous9" type="button" class="btn btn-primary">Previous (पिछला)</button>
+
+        </div>
+        <div class="col-sm-3">
+       
+                  <select style="margin-left: 10%;" name="mark" class="custom-select" required>
+    <option value="">Select (चयन)</option>
+    <option value="Mole">Mole (तिल)</option>
+    <option value="Scar">Scar (चोट का निसान)</option>
+    <option value="Mole and Scar">Mole and Scar(तिल और चोट का निसान)</option>
+    <option value="No">No Facial Mark (कोई फेशियल मार्क नहीं)</option>
+    <option value="Not">Don't Remember (याद नहीं है)</option>
+    
+    
+
+    
+  </select>
+        </div>
+        <div class="col"><button id="next10" type="button" class="btn btn-primary">Next (आगे)</button>
+
+        </div>
+      </div>
+  </div>
+                <div id="form11" style="text-align: center;" class="col">
+    <h2>Moustaches (मूंछें)</h2><br>
+
+       <div style="text-align: center; margin-top: 2%;" class="row">
+       	<div class="col-sm-4"></div>
+      <div  class="col-sm-4"><img class="img-fluid"  src="static/moustaches.png" alt="Chania"></div>
+
+    </div>
+
+      <div class="row">
+               <div class="col"><button id="previous10" type="button" class="btn btn-primary">Previous (पिछला)</button>
+
+        </div>
+        <div class="col-sm-3">
+       
+                  <select style="margin-left: 10%;" name="moustache" id="moustache" class="custom-select" required>
+    <option value="">Select (चयन)</option>
+    <option value="Original">Original moustache (ओरिजिनल मुस्टॅच)</option>
+    <option value="Horseshoe">Horseshoe moustache (हॉर्स्षू मुस्टॅच)</option>
+    <option value="Handlebar">Handlebar moustache (हॅंडल्बार मुस्टॅच)</option>
+    <option value="No">No moustache (कोई मूंछ नहीं)</option>
+    <option value="Not">Don't Remember (याद नहीं है)</option>
+    
+    
+
+    
+  </select>
+        </div>
+        <div class="col"><button id="next11" type="button" class="btn btn-primary">Next (आगे)</button>
+
+        </div>
+      </div>
+  </div>
+                  <div id="form12" style="text-align: center;" class="col">
+    <h2> Beard (दाढ़ी)</h2><br>
+
+       <div style="text-align: center; margin-top: 2%;" class="row">
+       	<div class="col-sm-4"></div>
+      <div  class="col-sm-4"><img class="img-fluid"  src="static/beard.png" alt="Chania"></div>
+
+    </div>
+
+      <div class="row">
+        <div class="col-sm-3"></div>
+               <div class="col-sm-3"><button id="previous11" type="button" class="btn btn-primary">Previous (पिछला)</button>
+
+        </div>
+        <div class="col-sm-3">
+       
+                  <select style="margin-left: 10%;" name="beard" id="beard" class="custom-select" required>
+    <option value="">Select (चयन)</option>
+    <option value="The Patchy Full-Faced">The Patchy Full-Faced Beard (द पैची फुल फेस्ड बियर्ड )</option>
+    <option value="French">French Beard (फ्रेंच दाढ़ी)</option>
+    <option value="No">No beard (कोई दाढ़ी नहीं)</option>
+    <option value="Not">Don't Remember (याद नहीं है)</option>
+      
+  </select>
+        </div>
+
+      </div>
+  </div>
+    </div>
+<br>
+  <div style="text-align: center;" class="row first">
+  
+  <div class="col-sm-12"><button style="width: 15vw;" type="submit" name="submit" onsubmit="return validatevalue();" class="btn btn-primary">Submit</button></div> 
+  <br> 
+  </div>
+  
+</form>
+
+</div>
+
+</body>
+</html>
+
+
