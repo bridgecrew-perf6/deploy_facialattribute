@@ -1,17 +1,8 @@
 argh==0.26.2
-asgiref==3.4.1
-astor==0.8.1
-astunparse==1.6.3
-async-generator==1.10
-blinker==1.4
-brotlipy==0.7.0
-certifi==2020.12.5
-click==7.1.2
 colorlog==6.6.0
 colormap==1.0.4
 cycler==0.10.0
 cytoolz==0.11.0
-decorator==4.4.2
 deepface==0.0.49
 defusedxml==0.6.0
 Django==3.2.7
@@ -34,7 +25,6 @@ itsdangerous==1.1.0
 Jinja2==2.11.2
 Keras==2.4.3
 Keras-Preprocessing==1.1.2
-llvmlite==0.37.0
 mkl-fft==1.2.0
 mkl-random==1.0.4
 mkl-service==2.3.0
