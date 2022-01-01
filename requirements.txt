@@ -25,9 +25,6 @@ itsdangerous==1.1.0
 Jinja2==2.11.2
 Keras==2.4.3
 Keras-Preprocessing==1.1.2
-mkl-fft==1.2.0
-mkl-random==1.0.4
-mkl-service==2.3.0
 mtcnn==0.1.0
 numba==0.54.0
 numpy==1.18.5
