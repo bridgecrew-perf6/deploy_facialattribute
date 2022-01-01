@@ -29,7 +29,6 @@ from imutils import face_utils
 import ctypes
 import copy
 from glob import glob
-from scipy import stats as s
 from colormap import rgb2hex
 from colormap import hex2rgb
 # Create your views here.
